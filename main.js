@@ -3,6 +3,22 @@ document.addEventListener('DOMContentLoaded', () => {
     const generateButton = document.getElementById('generate-button');
     const setsContainer = document.getElementById('sets-container');
     const setsSelect = document.getElementById('sets-select');
+    const themeButton = document.getElementById('theme-button');
+    const body = document.body;
+
+    // Theme Toggle Logic
+    const savedTheme = localStorage.getItem('theme');
+    if (savedTheme === 'light') {
+        body.classList.add('light-mode');
+        themeButton.textContent = '🌙 Dark Mode';
+    }
+
+    themeButton.addEventListener('click', () => {
+        body.classList.toggle('light-mode');
+        const isLight = body.classList.contains('light-mode');
+        themeButton.textContent = isLight ? '🌙 Dark Mode' : '☀️ Light Mode';
+        localStorage.setItem('theme', isLight ? 'light' : 'dark');
+    });
 
     generateButton.addEventListener('click', () => {
         generateAndDisplaySets();
